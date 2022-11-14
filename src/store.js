@@ -6,8 +6,8 @@ const reducer=combineReducers({})
 const initialState={}
 const middleWare=[thunk]
 
-//const store=createStore(
-const store=configureStore(
+const store=createStore(
+//const store = configureStore(
     reducer,
     initialState,
     composeWithDevTools(applyMiddleware(...middleWare))
