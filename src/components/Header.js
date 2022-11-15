@@ -12,7 +12,7 @@ const Header = () => {
           <Navbar.Toggle aria-controls='basic-navbar-nav' />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="ms-auto">
-            <LinkContainer to='/cart/:id'>
+            <LinkContainer to='/cart'>
             <Nav.Link><i className="fas fa-shopping-cart" > cart</i></Nav.Link>
             </LinkContainer>
             <LinkContainer to='/login'>
