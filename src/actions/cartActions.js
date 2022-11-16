@@ -11,7 +11,7 @@ export const addToCart=(id,qty)=> async(dispatch,getState)=>{
   image:data.image,
   price:data.price,
   countInStock:data.countInStock,
-  qty:data.qty
+  qty
     }
     })
     //it gives json or javascript object so use json.stringfy bcoz we only save string in localstorage
