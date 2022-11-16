@@ -18,3 +18,10 @@ export const addToCart=(id,qty)=> async(dispatch,getState)=>{
     //for string to json use json.parse ie see in store.js 
     localStorage.setItem('cartItem',JSON.stringify(getState().cart.cartItems))
 }
+export const removeFromCart=(id)=>(dispatch,getState)=>{
+    dispatch({
+        type:CART_REMOVE_ITEM,
+        payload:id,
+    })
+    localStorage.setItem('cartItem',JSON.stringify(getState().cart.cartItems))
+}
