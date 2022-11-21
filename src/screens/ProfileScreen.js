@@ -4,8 +4,8 @@ import {Form ,Row,Col,Button} from 'react-bootstrap'
 import { useDispatch,useSelector } from "react-redux"
 import Message from "../components/Message"
 import Loader from "../components/Loader"
-import { getUserDetails } from "../actions/userActions"
-
+import { getUserDetails,updateUserProfile } from "../actions/userActions"
+import { USER_UPDATE_PROFILE_RESET } from "../constants/userConstant"
 const ProfileScreen=()=>{
     const [name,setName]=useState('')
     const [email,setEmail]=useState('')
@@ -22,13 +22,16 @@ const ProfileScreen=()=>{
     const userLogin=useSelector(state=>state.userLogin)
     const {userInfo}=userLogin
 
+    const userUpdateProfile=useSelector(state=>state.userUpdateProfile)
+    const {success}=userUpdateProfile
+
     useEffect(()=>{
         if(!userInfo){
          navigate('/login')
         }
         else{
-            if(!user || !user.name){
-              console.log(user,"user1")
+            if(!user || !user.name ||success){
+              dispatch({type:USER_UPDATE_PROFILE_RESET})
               dispatch(getUserDetails('profile'))
             }else{
               console.log(user,"user2")
@@ -36,14 +39,14 @@ const ProfileScreen=()=>{
               setEmail(user.email)
             }
         }
-    },[dispatch,userInfo,user])
+    },[dispatch,userInfo,user,success])
 
     const submitHandler=(e)=>{
         e.preventDefault()
         if(password!==confirmPassword){
             setMessage("password do not match")
         }else{
-           // dispatch(register(name,email,password))
+            dispatch(updateUserProfile({id:user._id,name,email,password}))
         }
     }
     return(
@@ -52,6 +55,7 @@ const ProfileScreen=()=>{
 
          {message && <Message variant='danger' >{message}</Message>}
          {error && <Message variant='danger' >{error}</Message>}
+         {success && <Message variant='success' >Profile Updated</Message>}
          {loading && <Loader/>}
          <Form onSubmit={submitHandler} >
            <Form.Group controlId="name" >
