@@ -27,14 +27,16 @@ const ProfileScreen=()=>{
          navigate('/login')
         }
         else{
-            if(!user.name){
+            if(!user || !user.name){
+              console.log(user,"user1")
               dispatch(getUserDetails('profile'))
             }else{
+              console.log(user,"user2")
               setName(user.name)
               setEmail(user.email)
             }
         }
-    },[dispatch,userInfo])
+    },[dispatch,userInfo,user])
 
     const submitHandler=(e)=>{
         e.preventDefault()
@@ -55,7 +57,7 @@ const ProfileScreen=()=>{
            <Form.Group controlId="name" >
             <Form.Label>name</Form.Label>
             <Form.Control
-            type='text'
+            type='name'
             placeholder="enter name"
             value={name}
             onChange={(e)=>setName(e.target.value)}
