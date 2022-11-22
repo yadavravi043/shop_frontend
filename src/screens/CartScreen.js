@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import React from "react";
-import { Link, useParams, useLocation } from "react-router-dom";
+import { Link, useParams, useLocation, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import Message from "../components/Message";
 import {
@@ -14,6 +14,7 @@ import {
 } from "react-bootstrap";
 import { addToCart, removeFromCart } from "../actions/cartActions";
 const CartScreen = () => {
+  const navigate=useNavigate()
   const param = useParams();
   const location = useLocation();
   const productId = param.id;
@@ -31,7 +32,9 @@ const CartScreen = () => {
   const removeFromCartHandler = (id) => {
     dispatch(removeFromCart(id));
   };
-  const checkoutHandler = () => {};
+  const checkoutHandler = () => {
+    navigate('/shipping')
+  };
   return (
     <Row>
       <Col md={8}>
