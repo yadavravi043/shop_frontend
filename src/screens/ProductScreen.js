@@ -94,7 +94,7 @@ import {
 } from "react-bootstrap";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { listProductsDetails } from "../actions/productActions";
+import { listProductDetails } from "../actions/productActions";
 import Loader from "../components/Loader";
 import Message from "../components/Message";
 
@@ -103,12 +103,12 @@ const ProductScreen = ({match }) => {
   const navigate=useNavigate()
   const dispatch = useDispatch()
   const [qty, setQty] = useState(1)
-  const productDetails = useSelector((state) => state.productDetails);
+  const productDetails = useSelector(state => state.productDetails);
   const { loading, error, product } = productDetails;
 
   useEffect(() => {
-    dispatch(listProductsDetails(params.id));
-  }, [dispatch, match]);
+    dispatch(listProductDetails(params.id));
+  }, [dispatch,match]);
 
 const addToCartHandler = () =>{
   navigate(`/cart/${params.id}?qty=${qty}`)

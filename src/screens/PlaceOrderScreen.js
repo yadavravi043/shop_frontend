@@ -7,6 +7,7 @@ import Message from "../components/Message"
 import CheckoutSteps from "../components/CheckoutSteps"
 import { createOrder } from "../actions/orderActions"
 const PlaceOrderScreen = () => {
+    
     const navigate=useNavigate()
     const dispatch=useDispatch()
     const cart=useSelector(state=>state.cart)
@@ -24,7 +25,7 @@ const PlaceOrderScreen = () => {
   const {order,success,error}=orderCreate
 
 
-  useDispatch(()=>{
+  useEffect(()=>{
      if(success){
         navigate(`/order/${order._id}`)
      }
