@@ -31,19 +31,34 @@ const OrderScreen = () => {
        <ListGroup variant='flush' >
           <ListGroup.Item>
              <h1>Shipping</h1>
+              
+             <p>
+             <strong>Name:</strong>{order.user.name}
+             </p>
+             <p>
+               <strong>Email</strong>{''}
+               <a href={`mailto:${order.user.email}`} >{order.user.email}</a>
+             </p>
+
              <p>
              <strong>Address:</strong>
              {order.shippingAddress.address},
              {order.shippingAddress.city},
              {order.shippingAddress.postalCode},
              {order.shippingAddress.country}
-             </p>    
+             </p> 
+             {order.isDelivered ?(<Message variant='success' >delivered at {order.deliveredAt}</Message>):
+               (<Message variant='danger' >Not Delivered</Message>)}   
           </ListGroup.Item>
 
              <ListGroup.Item>
                <h1>payment method</h1>
+               <p>
                <strong>Method:</strong>
                {order.paymentMethod}
+               </p>
+               {order.isPaid ?(<Message variant='success' >paid on {order.paidAt}</Message>):
+               (<Message variant='danger' >Not Paid</Message>)}
              </ListGroup.Item>
 
          <ListGroup.Item>
@@ -71,6 +86,8 @@ const OrderScreen = () => {
          </ListGroup.Item>
        </ListGroup>
      </Col>
+
+
       <Col md={4}>
      <Card>
       <ListGroup variant='flush'>

@@ -5,6 +5,9 @@ import { ORDER_CREATE_REQUEST,
     ORDER_DETAILS_REQUEST,
     ORDER_DETAILS_SUCCESS,
     ORDER_DETAILS_FAIL,
+    ORDER_PAY_REQUEST,
+    ORDER_PAY_SUCCESS,
+    ORDER_PAY_FAIL,
 
  } from "../constants/orderConstant"
 
@@ -62,4 +65,28 @@ import { ORDER_CREATE_REQUEST,
     }
    }
    
-   
+ export const orderPay= (orderId,paymentResult) =>async(dispatch,getState)=>{
+     try{
+         dispatch({
+             type:ORDER_PAY_REQUEST,
+            })
+            const {userLogin:{userInfo},} = getState()
+            const config={
+                headers:{
+                    'Content-Type':'Application/json',
+                    Authorization:`Bearer ${userInfo.token}`,
+                },
+            }
+            const { data }= await axios.put(`/api/orders/${orderId}/pay`,paymentResult,config) 
+     dispatch({
+       type:ORDER_PAY_SUCCESS,
+       payload:data
+     })
+    }
+    catch(error){
+       dispatch({
+           type:ORDER_PAY_FAIL,
+           payload:error.response && error.response.data.mesage?error.response.data.mesage:error.message,
+         })
+    }
+}
