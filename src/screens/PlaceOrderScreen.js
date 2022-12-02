@@ -15,11 +15,11 @@ const PlaceOrderScreen = () => {
     const {paymentMethod}=cart
  
     //calculate total price for order
-     cart.itemsPrice=(Number(cart.cartItems.reduce((acc,item)=>acc+item.price * item.qty,0)))
+     cart.itemsPrice=(Number(cart.cartItems.reduce((acc,item)=>acc+item.price * item.qty,0))).toFixed(3)
      {cart.cartItems.length===0?(cart.shippingPrice=0):
      (cart.shippingPrice=(cart.itemsPrice>300 ?0:100).toFixed(2))}
      cart.taxPrice=(Number(cart.itemsPrice)*0.18).toFixed(2)
-     cart.totalPrice=(Number(cart.itemsPrice)+ Number(cart.shippingPrice)+Number(cart.taxPrice))
+     cart.totalPrice=(Number(cart.itemsPrice)+ Number(cart.shippingPrice)+Number(cart.taxPrice)).toFixed(2)
 
   const orderCreate=useSelector(state=>state.orderCreate)
   const {order,success,error}=orderCreate
